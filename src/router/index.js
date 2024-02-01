@@ -5,8 +5,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/components/Home.vue';
 import Component1 from '@/components/Component1.vue';
 import GetApi from '@/components/GetApi.vue';
-
-
+import Buscador from '@/components/Buscador.vue';
+import Film from '@/components/Film.vue';
+import Watchlist from '@/components/Watchlist.vue';
+import Carrusel from '@/components/Carrusel.vue'
 // Define your routes
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +27,26 @@ const router = createRouter({
       path: '/getapi',
       name: 'getapi',
       component: GetApi
+    },
+    {
+      path:'/buscador',
+      name: 'buscador',
+      component: Buscador
+    },
+    {
+      path:'/film',
+      name: 'film',
+      component: Film
+    },
+    {
+      path: '/watchlist',
+      name: 'watchlist',
+      component: Watchlist
+    },
+    {
+      path:'/carrusel',
+      name: 'carrusel',
+      component: Carrusel
     }
   ]
 })
