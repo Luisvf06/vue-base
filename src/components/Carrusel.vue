@@ -1,16 +1,42 @@
 <template>
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/3OdMJBOGkp62e0DfY4ZykL9RuCP.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/tFyQa5WQqldIL44HBLaCmn5eERD.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/5LzUc0LBM1RGlooQUsqbsGHZQHW.jpg" class="d-block w-100" alt="...">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div v-for="(movie, index) in movies" :key="index" :class="{ 'carousel-item': true, 'active': index === 0 }" data-bs-interval="4000">
+        <img :src="getMovieImageUrl(movie.backdrop_path)" class="d-block w-100" alt="Movie Poster">
+      </div>
     </div>
   </div>
-</div>
 </template>
-<script setup></script>
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const apiKey = ref('4431fed8390b02d6c28655feb536156a')
+const bearerToken = ref('eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDMxZmVkODM5MGIwMmQ2YzI4NjU1ZmViNTM2MTU2YSIsInN1YiI6IjY1YThmOTNlYzRmNTUyMDEyNzhlNjU2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.nArKWLxihtW5aycNC-GAqUwF7JGeo_Rj13o_5ZA7K3w')
+const movies = ref([])
+
+const getMoviesUrlApi = () => {
+    fetch('https://api.themoviedb.org/3/movie/popular?api_key=' + apiKey.value)
+        .then(response => response.json())
+        .then(data => movies.value = data.results.slice(0,3))
+        
+}
+const getMoviesHeaderApi = () => {
+    fetch('https://api.themoviedb.org/3/movie/popular', {
+        headers: {
+            'Authorization': 'Bearer ' + bearerToken.value
+        }
+    })
+        .then(response => response.json())
+        .then(data => movies.value = data.results)
+}
+onMounted(() => {
+  getMoviesUrlApi()
+})
+
+
+const getMovieImageUrl = (posterPath) => {
+    if (posterPath) {
+        return 'https://image.tmdb.org/t/p/w500/' + posterPath;
+    }
+}
+</script>
