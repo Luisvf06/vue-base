@@ -1,19 +1,23 @@
 <template>
   <div class="container">
-    <div class="row">
-      <header class="col-12">
-       
-      </header>
-
-  <Carrusel />
-</div>
-</div>
-
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <Carrusel />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <Lista />
+      </div>
+    </div>
+  </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue';
 import Carrusel from './Carrusel.vue'
+import Lista from './lista.vue'
 </script>
 
 <style lang="scss" scoped>
