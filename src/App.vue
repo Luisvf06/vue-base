@@ -12,20 +12,32 @@ import { RouterLink, RouterView } from "vue-router";
         width="125"
         height="125"
       />
-      <nav class="col-7"> <!-- Modifica el tamaño de esta columna -->
-        <a><RouterLink to="/">Home</RouterLink></a>
-        <a><RouterLink to="/buscador">Buscador</RouterLink></a>
-        <a><RouterLink to="/watchlist">watchlist</RouterLink></a>
-        <a><RouterLink to="/film">Película</RouterLink></a>
-      </nav>
-      <div class="col-3"> <!-- Modifica el tamaño de esta columna -->
-        <div class="d-flex align-items-center">
-          <div class="mb-3 d-inline">
-            <input type="text" class="form-control" id="buscador" aria-describedby="buscador" placeholder="Buscar película...">
-          </div>
-          <button type="submit" class="btn btn-primary ml-2">Submit</button>
-        </div>
-      </div>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" ><RouterLink to="/">Home</RouterLink></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"><RouterLink to="/buscador">Buscador</RouterLink></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"><RouterLink to="/watchlist">watchlist</RouterLink></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"><RouterLink to="/film">Película</RouterLink></a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+      
     </header>
     <main>
       <RouterView />
