@@ -1,5 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import {ref} from 'vue'
+import Buscador from "./components/Buscador.vue";
+
 </script>
 
 <template>
@@ -31,8 +34,9 @@ import { RouterLink, RouterView } from "vue-router";
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="Buscador">
+        <button class="btn btn-outline-success" type="submit" @click="$router.push('/api?cadena='+Buscador)">Search</button>
+
       </form>
     </div>
   </div>
