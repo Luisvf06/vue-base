@@ -30,12 +30,11 @@ const router = createRouter({
     },
     {
       path:'/buscador',
-      name: 'buscador',
       component: Buscador
     },
     {
-      path:'/film',
-      name: 'film',
+      path:'/film/:id',
+      name: 'Film',
       component: Film
     },
     {

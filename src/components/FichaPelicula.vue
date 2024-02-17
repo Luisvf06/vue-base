@@ -32,6 +32,7 @@
   // Escucha el evento 'peliculaElegida' emitido desde 'lista.vue'
   const onPeliculaElegida = (movie) => {
     selectedMovie.value = movie;
+    console.log("hola")
   };
   </script>
   

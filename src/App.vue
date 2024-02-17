@@ -16,9 +16,6 @@
                 <a class="nav-link active" aria-current="page" ><RouterLink to="/">Home</RouterLink></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page"><RouterLink to="/buscador">Buscador</RouterLink></a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link active" aria-current="page"><RouterLink to="/watchlist">watchlist</RouterLink></a>
               </li>
               <li class="nav-item">
@@ -27,7 +24,7 @@
             </ul>
             <form @submit.prevent="realizarBusqueda" class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="textoBusqueda">
-              <button class="btn btn-outline-success" @click="$router.push('buscador?caedna='+textoBusqueda)" type="submit">Search</button>
+              <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
           </div>
         </div>
@@ -36,7 +33,6 @@
     </header>
     <main>
       <RouterView />
-      <Buscador /> <!-- Utiliza el componente Buscador como una etiqueta -->
     </main>
   </div>
 </template>
@@ -44,13 +40,19 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const textoBusqueda = ref('');
+const router = useRouter();
 
 const realizarBusqueda = () => {
-  // Puedes realizar acciones relacionadas con la búsqueda aquí
-  console.log('Realizando búsqueda:', textoBusqueda.value);
-}
+  router.push({ path: '/buscador', query: { cadena: textoBusqueda.value } });
+};
+
+// Manejar la navegación hacia Film.vue cuando se selecciona una película
+const manejarSeleccionPelicula = (pelicula) => {
+  router.push({ name: 'film', params: { id: pelicula.id } });
+};
 </script>
 
 <style scoped>

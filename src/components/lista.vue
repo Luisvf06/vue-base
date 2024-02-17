@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div v-for="movie in movies" :key="movie.id" class="col-md-4 mb-4" @click="elegirPeli(movie)">
+    <div v-for="movie in movies" :key="movie.id" class="col-md-4 mb-4" @click="elegirPeli(movie.id)">
       <div class="card">
         <img :src="getMovieImageUrl(movie.poster_path)" class="card-img-top" alt="Movie Poster">
         <span v-if="movie.vote_average.toFixed(2) >= 8.55" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
@@ -44,8 +44,8 @@ const getMovieImageUrl = (posterPath) => {
   }
 };
 
-const elegirPeli = (movie) => {
-  emit('peliculaElegida', movie);
+const elegirPeli = (movieId) => {
+  emit('peliculaElegida', movieId); // Emitir el ID de la película en lugar del objeto completo
 };
 
 onMounted(() => {

@@ -25,14 +25,17 @@ import { ref } from 'vue';
 import Carrusel from './Carrusel.vue'
 import Lista from './lista.vue'
 import FichaPelicula from './FichaPelicula.vue'
+import { useRouter } from 'vue-router';
 
 // Definir la variable reactiva para almacenar la película seleccionada
 const peliculaSeleccionada = ref(null);
+const router = useRouter();
 
 // Función para mostrar los detalles de la película seleccionada
 const mostrarDetalles = (pelicula) => {
   peliculaSeleccionada.value = pelicula;
-}
+  router.push({ name: 'film', params: { id: pelicula.id } });
+};
 </script>
 
 <style lang="scss" scoped>
