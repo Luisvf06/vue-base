@@ -1,6 +1,5 @@
 <template>
     <div>
-      <!-- Agrega el componente hijo y escucha el evento -->
       <lista @peliculaElegida="manejarPeliculaElegida" />
       <p>{{ pelicula.title }}</p>
       <!-- Otros detalles de la película -->
@@ -13,7 +12,6 @@
   
   const pelicula = ref(null);
   
-  // Método para manejar la película seleccionada
   const manejarPeliculaElegida = (movie) => {
     pelicula.value = movie;
   };

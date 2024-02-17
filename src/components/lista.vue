@@ -45,7 +45,7 @@ const getMovieImageUrl = (posterPath) => {
 };
 
 const elegirPeli = (movieId) => {
-  emit('peliculaElegida', movieId); // Emitir el ID de la película en lugar del objeto completo
+  emit('peliculaElegida', movieId);
 };
 
 onMounted(() => {
@@ -54,5 +54,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Agrega tus estilos CSS personalizados aquí si es necesario */
+
 </style>
