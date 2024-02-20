@@ -2,7 +2,6 @@
     <div>
       <lista @peliculaElegida="manejarPeliculaElegida" />
       <p>{{ pelicula.title }}</p>
-      <!-- Otros detalles de la película -->
     </div>
   </template>
   

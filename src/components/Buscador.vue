@@ -1,6 +1,10 @@
 <template>
-  <div class="row">
-    <div v-for="pelicula in peliculas" :key="pelicula.id" class="col-md-4 mb-4">
+  <div>
+    <label for="customRange3" class="form-label">Filtrar por popularidad</label>
+    <input type="range" class="form-range" min="0" max="10" step="0.5" id="customRange3" v-model="rangoPopularidad">
+    <p>Valoración de la comunidad: {{ rangoPopularidad }}</p>
+    <div class="row">
+      <div v-for="pelicula in peliculasOrdenadas" :key="pelicula.id" class="col-md-4 mb-4">
       <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
           <div class="col-md-4 position-relative">
@@ -30,14 +34,16 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRoute } from'vue-router';
 const apiKey = '4431fed8390b02d6c28655feb536156a';
 const peliculas = ref([]);
 const route = useRoute();
+const rangoPopularidad = ref(0);
 
 const realizarBusquedaAPI = async () => {
   try {
@@ -61,6 +67,13 @@ const getImagenPelicula = (rutaPoster) => {
   }
 }
 
+
+const peliculasFiltradas = computed(() => {
+  return peliculas.value.filter(pelicula => pelicula.vote_average >= rangoPopularidad.value)
+});
+const peliculasOrdenadas = computed(() => {
+  return peliculasFiltradas.value.slice().sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+});
 const elegirPelicula = (pelicula) => {
   // Lógica para elegir una película
 }

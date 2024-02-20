@@ -3,7 +3,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // Import your components
 import Home from '@/components/Home.vue';
-import Component1 from '@/components/Component1.vue';
 import GetApi from '@/components/GetApi.vue';
 import Buscador from '@/components/Buscador.vue';
 import Film from '@/components/Film.vue';
@@ -17,11 +16,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home
-    },
-    {
-      path: '/component1',
-      name: 'component1',
-      component: Component1
     },
     {
       path: '/getapi',
