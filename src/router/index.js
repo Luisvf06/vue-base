@@ -7,7 +7,8 @@ import GetApi from '@/components/GetApi.vue';
 import Buscador from '@/components/Buscador.vue';
 import Film from '@/components/Film.vue';
 import Watchlist from '@/components/Watchlist.vue';
-import Carrusel from '@/components/Carrusel.vue'
+import Carrusel from '@/components/Carrusel.vue';
+import Detalles from '@/components/Detalles.vue';
 // Define your routes
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +31,11 @@ const router = createRouter({
       path:'/film/:id',
       name: 'Film',
       component: Film
+    },
+    {
+      path:'/Detalles/:id',
+      name: 'Detalles',
+      component: Detalles
     },
     {
       path: '/watchlist',
