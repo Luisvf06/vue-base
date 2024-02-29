@@ -13,7 +13,7 @@
               <h1 class="modal-title fs-5" id="exampleModalLabel">Trailer {{ selectedMovie.original_title }}</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <!-- Aquí puedes incluir el reproductor de video para el trailer de la película -->
+            
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
@@ -26,10 +26,10 @@
   <script setup>
   import { ref } from 'vue';
   
-  // Define una variable reactiva para almacenar la información de la película seleccionada
+  
   const selectedMovie = ref(null);
   
-  // Escucha el evento 'peliculaElegida' emitido desde 'lista.vue'
+  
   const onPeliculaElegida = (movie) => {
     selectedMovie.value = movie;
     console.log("hola")

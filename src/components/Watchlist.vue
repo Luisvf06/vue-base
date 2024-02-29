@@ -1,5 +1,5 @@
 <template>
-  <h1>Películas para ver</h1>
+  <h1>Películas pendientes</h1>
   <div class="row">
     <div v-for="movie in movies" :key="movie.id" class="col-md-4 mb-4">
       <div class="card-hover-wrapper" @click="elegirPeli(movie)">
@@ -63,7 +63,7 @@
     const data = await response.json();
     if (data.success) {
       console.log('Película eliminada de la watchlist con éxito');
-      getWatchlistMovies(); // Recargar la lista de watchlist para reflejar los cambios
+      getWatchlistMovies(); 
     } else {
       console.error('Error al eliminar la película de la watchlist', data);
     }
@@ -86,14 +86,14 @@
   onMounted(() => {
     getWatchlistMovies();
   });
-  // Dentro de tu componente Vue <script setup>
+  
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(fas) // Agrega todos los iconos del paquete fas
+library.add(fas) 
 
-// Aquí puedes seguir con el resto de tu script
+
 
   </script>
   
@@ -109,25 +109,24 @@ library.add(fas) // Agrega todos los iconos del paquete fas
     right: 10px;
     display: none;
     z-index: 2;
-    padding: 0.375rem 0.75rem; // Padding de Bootstrap para botones
-    font-size: 1rem; // Tamaño de fuente estándar para botones
-    font-weight: 400; // Peso de la fuente para coincidir con Bootstrap
-    line-height: 1.5; // Altura de línea para botones
-    text-align: center; // Centrado de texto dentro del botón
-    white-space: nowrap; // Evita el salto de línea dentro del botón
-    vertical-align: middle; // Alineación vertical
-    border: 1px solid transparent; // Borde transparente inicial
-    border-color: #dc3545; // Color del borde para btn-outline-danger
-    color: #dc3545; // Color del texto para btn-outline-danger
-    background-color: transparent; // Fondo transparente
-    border-radius: 0.25rem; // Bordes redondeados al estilo de Bootstrap
-    cursor: pointer; // Cambia el cursor a pointer
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; // Transición suave al cambiar estados
-
+    padding: 0.375rem 0.75rem; 
+    font-size: 1rem;
+    font-weight: 400; 
+    line-height: 1.5; 
+    text-align: center; 
+    white-space: nowrap; 
+    vertical-align: middle; 
+    border: 1px solid transparent; 
+    border-color: #dc3545; 
+    color: #dc3545; 
+    background-color: transparent;
+    border-radius: 0.25rem; 
+    cursor: pointer; 
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; 
     &:hover {
-      color: #fff; // Color de texto al pasar el mouse
-      background-color: #dc3545; // Color de fondo al pasar el mouse
-      border-color: #dc3545; // Color del borde al pasar el mouse
+      color: #fff;
+      background-color: #dc3545; 
+      border-color: #dc3545; 
     }
   }
 
@@ -137,8 +136,10 @@ library.add(fas) // Agrega todos los iconos del paquete fas
 }
 
 h1 {
+  color: #E0E0FF;
   text-decoration: underline;
 }
+
 
 h3 {
   margin-top: 20px;

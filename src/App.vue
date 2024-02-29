@@ -49,7 +49,7 @@ const realizarBusqueda = () => {
   router.push({ path: '/buscador', query: { cadena: textoBusqueda.value } });
 };
 
-// Manejar la navegación hacia Film.vue cuando se selecciona una película
+
 const manejarSeleccionPelicula = (pelicula) => {
   router.push({ name: 'film', params: { id: pelicula.id } });
 };
@@ -57,12 +57,27 @@ const manejarSeleccionPelicula = (pelicula) => {
 
 <style scoped lang="scss">
 @import 'components/_styles.scss';
+
 header {
+  background-color: $color-primario;
+  color: $color-terciario;
   line-height: 1.5;
+  padding: 1rem 0;
 }
 
 .logo {
   display: block;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
+  width: 125px; 
+}
+
+nav.navbar {
+  background-color: $color-secundario;
+  .nav-link {
+    color: $color-cuarto;
+    &:hover {
+      color: lighten($color-cuarto, 10%); 
+    }
+  }
 }
 </style>

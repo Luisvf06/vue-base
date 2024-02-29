@@ -55,17 +55,37 @@ onMounted(() => {
 });
 </script>
 
-<style  lang="scss">/*si dejo el scoped en style no cambia el background color*/
-
+<style  lang="scss">
 @import '_styles.scss';
-  /* Estilos para anular el formato de enlace */
-  .card-link {
-    text-decoration: none; /* Quita el subrayado */
-     /* Hereda el color del texto */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el enlace */
-  }
 
-  .card-link:hover {
-    color: inherit; /* Hereda el color del texto al pasar sobre el enlace */
+.card-link {
+  text-decoration: none;
+  color: $color-primario;
+  cursor: pointer;
+
+  &:hover {
+    color: darken($color-primario, 10%);
   }
+  
+  .card {
+    border: 1px solid lighten($color-secundario, 10%);
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+    
+    .card-img-top {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    
+    .card-body {
+      background-color: $color-cuarto;
+      color: $color-primario;
+    }
+  }
+}
 </style>
+

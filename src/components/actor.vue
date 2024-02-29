@@ -7,7 +7,7 @@
         <p><strong>Fecha de nacimiento:</strong> {{ actor.birthday }}</p>
         <p><strong>Lugar de nacimiento:</strong> {{ actor.place_of_birth }}</p>
   
-        <!-- Sección de películas -->
+        
         <div v-if="movieCredits.cast.length">
           <h2>Películas</h2>
           <div class="row">

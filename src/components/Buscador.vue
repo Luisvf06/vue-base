@@ -96,19 +96,19 @@ const ordenarPorFecha = (tipo) => {
 };
 
 const elegirPelicula = (pelicula) => {
-  // Lógica para elegir una película
+  
 };
 
-// Llama a la búsqueda cuando la ruta de consulta cambia
+
 watch(() => route.query.cadena, () => {
   if (route.query.cadena) {
     realizarBusquedaAPI();
   } else {
-    peliculas.value = []; // Limpia la lista de películas si no hay cadena de búsqueda
+    peliculas.value = []; 
   }
 });
 
-// Llama a la búsqueda cuando la página se monta
+
 onMounted(() => {
   if (route.query.cadena) {
     realizarBusquedaAPI();
@@ -116,14 +116,14 @@ onMounted(() => {
 });
 </script>
 <style scoped>
-  /* Estilos para anular el formato de enlace */
+  
   .card-link {
-    text-decoration: none; /* Quita el subrayado */
-    color: inherit; /* Hereda el color del texto */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el enlace */
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer; 
   }
 
   .card-link:hover {
-    color: inherit; /* Hereda el color del texto al pasar sobre el enlace */
+    color: inherit; 
   }
 </style>

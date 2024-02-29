@@ -2,7 +2,9 @@
   <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div v-for="(movie, index) in movies" :key="index" :class="{ 'carousel-item': true, 'active': index === 0 }" data-bs-interval="4000">
+        <a :href="'/Detalles/'+movie.id" class="card-link">
         <img :src="getMovieImageUrl(movie.backdrop_path)" class="d-block w-100" alt="Movie Poster" @click="elegirPelicula(movie)">
+        </a>
       </div>
     </div>
   </div>

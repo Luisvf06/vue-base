@@ -3,7 +3,7 @@
     <h1>{{ pelicula.title }}</h1>
     <img :src="getImagenPelicula(pelicula.poster_path)" class="img-fluid rounded-start mb-3" alt="Movie Poster">
     
-    <!-- Botones con estilo de Bootstrap -->
+    
     <div class="d-flex justify-content-start mb-3">
       <button @click="agregarAPeliculaAWatchlist" class="btn btn-primary me-2">Agregar a Watchlist</button>
       <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
@@ -11,12 +11,11 @@
       </button>
     </div>
 
-    <!-- Contenedor de colapso para Películas Recomendadas -->
-<!-- Contenedor de colapso para Películas Recomendadas -->
+
 <div style="min-height: 120px;">
   <div class="collapse collapse-horizontal" id="collapseWidthExample">
     <div class="card card-body">
-      <!-- Utiliza 'row' para envolver las recomendaciones -->
+      
       <div class="row">
         <div v-for="recomendacion in recomendaciones" :key="recomendacion.id" class="col-sm-6 col-md-4 col-lg-3 mb-3">
           <a :href="'/Detalles/'+recomendacion.id" class="card-link">
@@ -42,7 +41,7 @@
     </div>
 
 
-    <!-- Otros detalles de la película y reparto -->
+
     <div class="reparto">
   <h2>Reparto</h2>
   <div class="row">
@@ -155,51 +154,54 @@ const agregarAPeliculaAWatchlist = () => {
     },
     body: JSON.stringify({
       media_type: 'movie',
-      media_id: pelicula.value.id, // Asegúrate de que 'pelicula.value.id' tenga el ID correcto de la película
+      media_id: pelicula.value.id, 
       watchlist: true
     })
   };
 
-  fetch(`https://api.themoviedb.org/3/account/{account_id}/watchlist`, options) // Sustituye {account_id} por tu ID de cuenta real
+  fetch(`https://api.themoviedb.org/3/account/{account_id}/watchlist`, options) 
     .then(response => response.json())
     .then(data => {
       if (data.success) {
         alert('Película agregada a la watchlist con éxito');
-        // Aquí puedes agregar cualquier lógica adicional tras una adición exitosa
+        
       } else {
         alert('Hubo un error al agregar la película a la watchlist');
-        // Puedes manejar errores específicos aquí
+        
       }
     })
     .catch(err => {
       console.error(err);
       alert('Ocurrió un error al intentar agregar la película a la watchlist');
-      // Manejo de errores de red o del servidor
+      
     });
 };
 </script>
-<style scoped lang="scss">
+<style  lang="scss">
 @import '_styles.scss';
 
-/* Centra el contenido de la página */
 div {
   text-align: center;
 }
 
-/* Ajustes para la imagen de la película */
 img.img-fluid.rounded-start {
-  max-width: 80%; /* Ajusta el ancho de la imagen de la película */
-  margin: 0 auto; /* Centra la imagen */
+  max-width: 80%;
+  margin: 20px auto;
+  border-radius: 10px; 
 }
 
-/* Estilos para el reparto */
+
 .reparto {
+  background-color: $color-terciario;
+  color: $color-primario;
+  padding: 2rem 0;
+  
   h2 {
-    margin-top: 2rem;
+    color: $color-cuarto;
   }
 
   .row {
-    justify-content: center; /* Centra las tarjetas de los actores */
+    justify-content: center;
   }
 
   .col-md-3 {
@@ -210,20 +212,9 @@ img.img-fluid.rounded-start {
   }
 
   img {
-    width: 100px; /* Reduce el tamaño de las fotos de los actores */
-    height: auto; /* Mantiene la proporción de las fotos */
-    border-radius: 50%; /* Hace las imágenes circulares para un estilo más elegante */
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
   }
-}
-
-/* Estilos para anular el formato de enlace */
-.card-link {
-  text-decoration: none; /* Quita el subrayado */
-  color: inherit; /* Hereda el color del texto */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el enlace */
-}
-
-.card-link:hover {
-  color: inherit; /* Hereda el color del texto al pasar sobre el enlace */
 }
 </style>
