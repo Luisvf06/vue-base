@@ -39,18 +39,6 @@ const mostrarDetalles = (pelicula) => {
 </script>
 
 <style lang="scss" scoped>
-$color-primario: #183b31;
-$color-secundario: #C69774;
-$color-terciario: #F8DFD4;
-$color-cuarto: #FFEFE8;
-header {
-  background-color: $color-primario;
-  h1 {
-    text-decoration: underline;
-    color: $color-terciario;
-  }
-  p {
-    color: $color-cuarto;
-  }
-}
+@import './_variables.scss';
+@import './_styles.scss';
 </style>
