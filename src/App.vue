@@ -55,7 +55,8 @@ const manejarSeleccionPelicula = (pelicula) => {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import 'components/_styles.scss';
 header {
   line-height: 1.5;
 }

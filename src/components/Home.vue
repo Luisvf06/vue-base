@@ -39,6 +39,6 @@ const mostrarDetalles = (pelicula) => {
 </script>
 
 <style lang="scss" scoped>
-@import './_variables.scss';
+
 @import './_styles.scss';
 </style>

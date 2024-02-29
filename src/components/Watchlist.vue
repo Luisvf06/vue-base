@@ -1,57 +1,146 @@
 <template>
-<h1>Películas vistas</h1>  
-<div class="row">
-    <div v-for="movie in movies" :key="movie.id" class="col-md-4 mb-4" @click="elegirPeli(movie)">
-      <div class="card">
-        <img :src="getMovieImageUrl(movie.poster_path)" class="card-img-top" alt="Movie Poster">
-        <div class="card-body">
-          <h5 class="card-title">{{ movie.title }}</h5>
-          <span>Idioma original: {{ movie.original_language }}</span>
-          <br>
-          <span>{{ movie.overview.substring(0,200)+'...' }}</span>
-        </div>
+  <h1>Películas para ver</h1>
+  <div class="row">
+    <div v-for="movie in movies" :key="movie.id" class="col-md-4 mb-4">
+      <div class="card-hover-wrapper" @click="elegirPeli(movie)">
+        <a :href="'/Detalles/'+movie.id" class="card-link">
+          <div class="card">
+            <img :src="getMovieImageUrl(movie.poster_path)" class="card-img-top" alt="Movie Poster">
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.title }}</h5>
+              <span>Idioma original: {{ movie.original_language }}</span><br>
+              <span>{{ movie.overview.substring(0,200)+'...' }}</span>
+            </div>
+          </div>
+        </a>
+        <button class="btn-delete" @click.stop="borrarPelicula(movie.id)"><font-awesome-icon :icon="['fas', 'trash']" /></button>
       </div>
     </div>
-  </div>          
+  </div>
 </template>
 
-<script setup>
-import { ref, onMounted, defineEmits } from 'vue';
+  <script setup>
+  import { ref, onMounted, defineEmits } from 'vue';
+  const account_id = '20930787';
+  const emit = defineEmits(['peliculaElegida']);
+  const movies = ref([]);
+  
+  const getWatchlistMovies = () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDMxZmVkODM5MGIwMmQ2YzI4NjU1ZmViNTM2MTU2YSIsInN1YiI6IjY1YThmOTNlYzRmNTUyMDEyNzhlNjU2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.nArKWLxihtW5aycNC-GAqUwF7JGeo_Rj13o_5ZA7K3w'
+      }
+    };
+  
+    fetch(`https://api.themoviedb.org/3/account/20930787/watchlist/movies?language=en-US&page=1&sort_by=created_at.asc`, options)
+      .then(response => response.json())
+      .then(data => {
+        movies.value = data.results;
+        movies.value.sort((a, b) => b.vote_average - a.vote_average);
+      })
+      .catch(err => console.error(err));
+  };
 
-const emit = defineEmits(['peliculaElegida']);
+  const borrarPelicula = async (movieId) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDMxZmVkODM5MGIwMmQ2YzI4NjU1ZmViNTM2MTU2YSIsInN1YiI6IjY1YThmOTNlYzRmNTUyMDEyNzhlNjU2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.nArKWLxihtW5aycNC-GAqUwF7JGeo_Rj13o_5ZA7K3w'
+    },
+    body: JSON.stringify({
+      media_type: 'movie',
+      media_id: movieId,
+      watchlist: false
+    })
+  };
 
-const apiKey = ref('4431fed8390b02d6c28655feb536156a');
-const movies = ref([]);
-
-const getTopRatedMovies = () => {
-  fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey.value}`)
-    .then(response => response.json())
-    .then(data => {
-      movies.value = data.results;
-      movies.value.sort((a, b) => b.vote_average - a.vote_average);
-    });
-};
-
-const getMovieImageUrl = (posterPath) => {
-  if (posterPath) {
-    return `https://image.tmdb.org/t/p/w500/${posterPath}`;
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/account/${account_id}/watchlist`, options);
+    const data = await response.json();
+    if (data.success) {
+      console.log('Película eliminada de la watchlist con éxito');
+      getWatchlistMovies(); // Recargar la lista de watchlist para reflejar los cambios
+    } else {
+      console.error('Error al eliminar la película de la watchlist', data);
+    }
+  } catch (err) {
+    console.error('Error al conectar con la API', err);
   }
 };
 
-const elegirPeli = (movie) => {
-  emit('peliculaElegida', movie);
-};
 
-onMounted(() => {
-  getTopRatedMovies();
-});
-</script>
+  const getMovieImageUrl = (posterPath) => {
+    if (posterPath) {
+      return `https://image.tmdb.org/t/p/w500/${posterPath}`;
+    }
+  };
+  
+  const elegirPeli = (movie) => {
+    emit('peliculaElegida', movie);
+  };
+  
+  onMounted(() => {
+    getWatchlistMovies();
+  });
+  // Dentro de tu componente Vue <script setup>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-<style lang="scss" scoped>
-h1 {
-    text-decoration: underline;
+library.add(fas) // Agrega todos los iconos del paquete fas
+
+// Aquí puedes seguir con el resto de tu script
+
+  </script>
+  
+  <style scoped lang="scss">
+@import '_styles.scss';
+
+.card-hover-wrapper {
+  position: relative;
+
+  .btn-delete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+    z-index: 2;
+    padding: 0.375rem 0.75rem; // Padding de Bootstrap para botones
+    font-size: 1rem; // Tamaño de fuente estándar para botones
+    font-weight: 400; // Peso de la fuente para coincidir con Bootstrap
+    line-height: 1.5; // Altura de línea para botones
+    text-align: center; // Centrado de texto dentro del botón
+    white-space: nowrap; // Evita el salto de línea dentro del botón
+    vertical-align: middle; // Alineación vertical
+    border: 1px solid transparent; // Borde transparente inicial
+    border-color: #dc3545; // Color del borde para btn-outline-danger
+    color: #dc3545; // Color del texto para btn-outline-danger
+    background-color: transparent; // Fondo transparente
+    border-radius: 0.25rem; // Bordes redondeados al estilo de Bootstrap
+    cursor: pointer; // Cambia el cursor a pointer
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; // Transición suave al cambiar estados
+
+    &:hover {
+      color: #fff; // Color de texto al pasar el mouse
+      background-color: #dc3545; // Color de fondo al pasar el mouse
+      border-color: #dc3545; // Color del borde al pasar el mouse
+    }
+  }
+
+  &:hover .btn-delete {
+    display: block;
+  }
 }
+
+h1 {
+  text-decoration: underline;
+}
+
 h3 {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 </style>

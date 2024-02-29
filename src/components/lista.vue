@@ -55,13 +55,13 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">/*si dejo el scoped en style no cambia el background color*/
 
 @import '_styles.scss';
   /* Estilos para anular el formato de enlace */
   .card-link {
     text-decoration: none; /* Quita el subrayado */
-    color: inherit; /* Hereda el color del texto */
+     /* Hereda el color del texto */
     cursor: pointer; /* Cambia el cursor al pasar sobre el enlace */
   }
 

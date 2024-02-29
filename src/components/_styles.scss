@@ -1,10 +1,13 @@
 @import '_variables.scss';
-header {
+body{
+  background-color: $color-primario;
+  header {
     background-color: $color-primario;
     color: $color-terciario;
   
     h1 {
       text-decoration: underline;
+      color: $color-terciario;
     }
   
     p {
@@ -14,9 +17,8 @@ header {
         color: $color-cuarto;
       }
   }
-  body {
-    background-color: #f0f0f0; /* Color de fondo gris claro */
-  }
+}
+
   // Estilos para el carrusel
   #carouselExampleSlidesOnly {
     .carousel-item {
