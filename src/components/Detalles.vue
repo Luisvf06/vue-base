@@ -3,13 +3,32 @@
     <h1>{{ pelicula.title }}</h1>
     <img :src="getImagenPelicula(pelicula.poster_path)" class="img-fluid rounded-start mb-3" alt="Movie Poster">
     
-    
-    <div class="d-flex justify-content-start mb-3">
-      <button @click="agregarAPeliculaAWatchlist" class="btn btn-primary me-2">Agregar a Watchlist</button>
-      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+    <div class="d-flex justify-content-around mb-3">
+      <button @click="agregarAPeliculaAWatchlist" class="btn btn-primary me-3">Agregar a Watchlist</button>
+      <button class="btn btn-primary me-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
         Películas Recomendadas
       </button>
+      <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#trailerModal">
+        Ver Tráiler
+      </button>
     </div>
+
+
+
+
+<div class="modal fade" id="trailerModal" tabindex="-1" aria-labelledby="trailerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trailerModalLabel">{{ pelicula.title }} - Tráiler</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <iframe width="100%" height="480" :src="trailerUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div style="min-height: 120px;">
@@ -33,7 +52,7 @@
 </div>
 <div v-if="proveedores && proveedores.ES && proveedores.ES.flatrate">
       <h3>Disponible en:</h3>
-      <div class="proveedores">
+      <div class="proveedores d-flex justify-content-around">
         <div v-for="proveedor in proveedores.ES.flatrate" :key="proveedor.provider_id">
           <img :src="`https://image.tmdb.org/t/p/original${proveedor.logo_path}`" :alt="proveedor.provider_name" class="logo-proveedor">
         </div>
@@ -61,7 +80,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-
+const trailerUrl = ref('');
 const pelicula = ref({});
 const reparto = ref([]);
 const route = useRoute();
@@ -90,11 +109,35 @@ const getRecomendacionesPelicula = () => {
     })
     .catch(err => console.error(err));
 };
+
+const obtenerTrailerPelicula = async () => {
+  const movieId = route.params.id; // Asumiendo que el ID de la película está en los parámetros de la ruta
+  const apiKey = '4431fed8390b02d6c28655feb536156a'; // Reemplaza esto con tu API key de TMDB
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Respuesta de red no fue ok');
+
+    const data = await response.json();
+    const trailers = data.results.filter(video => video.type === 'Trailer' && video.site === 'YouTube');
+    if (trailers.length > 0) {
+      // Asumiendo que quieres el primer tráiler encontrado
+      trailerUrl.value = `https://www.youtube.com/embed/${trailers[0].key}`;
+    } else {
+      console.log('No se encontraron tráilers para esta película.');
+    }
+  } catch (error) {
+    console.error('Error al obtener el tráiler de la película:', error);
+  }
+};
+
 onMounted(() => {
   getMoviesUrlApi();
   getRepartoPelicula();
   getRecomendacionesPelicula();
   obtenerProveedoresPelicula();
+  obtenerTrailerPelicula();
 });
 
 const getMoviesUrlApi = () => {
@@ -177,11 +220,14 @@ const agregarAPeliculaAWatchlist = () => {
     });
 };
 </script>
-<style  lang="scss">
+<style  scoped lang="scss">
 @import '_styles.scss';
 
 div {
   text-align: center;
+}
+::v-deep .modal-body{
+  background-color: #557593;
 }
 
 img.img-fluid.rounded-start {
@@ -189,15 +235,16 @@ img.img-fluid.rounded-start {
   margin: 20px auto;
   border-radius: 10px; 
 }
+.card-body{background-color: #557593;}
 
-
-.reparto {
-  background-color: $color-terciario;
+.reparto a{
+  background-color: #557593;
   color: $color-primario;
   padding: 2rem 0;
+  text-decoration: none;
   
   h2 {
-    color: $color-cuarto;
+    color: $color-quinto;
   }
 
   .row {

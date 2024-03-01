@@ -1,0 +1,49 @@
+<template>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" v-for="(crumb, index) in breadcrumbs" :key="index">
+          <div style="display: inline-block;"> <!-- Aplicamos inline-block aquí -->
+            <span :to="{ path: crumb.path }" v-if="!crumb.active">{{ crumb.text }}</span>
+            <span v-else>{{ crumb.text }}</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+  </template>
+  
+  
+  <script setup>
+import { computed } from 'vue';
+import { useRoute, RouterLink } from 'vue-router';
+
+const route = useRoute();
+
+// Función para capitalizar la primera letra de una cadena
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const breadcrumbs = computed(() => {
+  const paths = route.path.split('/').filter(p => p);
+  const breadcrumbs = [];
+  let path = '';
+
+  for (let i = 0; i < paths.length; i++) {
+    path += `/${paths[i]}`;
+    const text = capitalizeFirstLetter(paths[i]); // Aplicamos la capitalización aquí
+
+    breadcrumbs.push({
+      text: text, // Texto con la primera letra en mayúscula
+      path: i < paths.length - 1 ? path : '',
+      active: i === paths.length - 1,
+    });
+  }
+
+  return breadcrumbs;
+});
+</script>
+
+  <style scoped lang="scss">
+  @import '_styles.scss';
+    .breadcrumb-item{background-color: $color-secundario;}
+</style>

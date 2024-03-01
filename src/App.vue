@@ -8,7 +8,7 @@
         width="125"
         height="125"
       />
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -16,10 +16,7 @@
                 <a class="nav-link active" aria-current="page" ><RouterLink to="/">Home</RouterLink></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page"><RouterLink to="/watchlist">watchlist</RouterLink></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page"><RouterLink to="/film">Película</RouterLink></a>
+                <a class="nav-link active" aria-current="page"><RouterLink to="/watchlist">Watchlist</RouterLink></a>
               </li>
             </ul>
             <form @submit.prevent="realizarBusqueda" class="d-flex" role="search">
@@ -31,6 +28,7 @@
       </nav>
       
     </header>
+    <breadcrumb />
     <main>
       <RouterView />
     </main>
@@ -41,7 +39,7 @@
 import { RouterLink, RouterView } from "vue-router";
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-
+import breadcrumb from './components/breadcrumb.vue'
 const textoBusqueda = ref('');
 const router = useRouter();
 
@@ -78,6 +76,8 @@ nav.navbar {
     &:hover {
       color: lighten($color-cuarto, 10%); 
     }
+    a{ color: $color-quinto;
+      text-decoration: none;}
   }
 }
 </style>
