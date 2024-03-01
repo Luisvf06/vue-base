@@ -226,10 +226,16 @@ const agregarAPeliculaAWatchlist = () => {
 div {
   text-align: center;
 }
-::v-deep .modal-body{
+:deep(.modal-body) {
   background-color: #557593;
 }
-
+.reparto{
+  background-color: #557593;
+  a{
+    color: $color-primario;
+    padding: 2rem 0;
+    text-decoration: none;
+}
 img.img-fluid.rounded-start {
   max-width: 80%;
   margin: 20px auto;
@@ -237,15 +243,11 @@ img.img-fluid.rounded-start {
 }
 .card-body{background-color: #557593;}
 
-.reparto a{
-  background-color: #557593;
-  color: $color-primario;
-  padding: 2rem 0;
-  text-decoration: none;
   
   h2 {
     color: $color-quinto;
   }
+
 
   .row {
     justify-content: center;
@@ -263,5 +265,9 @@ img.img-fluid.rounded-start {
     height: auto;
     border-radius: 50%;
   }
+
+}
+h3{
+  color: $color-quinto;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label for="customRange3" class="form-label">Filtrar por popularidad</label>
+    <label for="customRange3" class="form-label text-primary">Filtrar por popularidad</label>
     <input type="range" class="form-range" min="0" max="10" step="0.5" id="customRange3" v-model="rangoPopularidad">
-    <p>Valoración de la comunidad: {{ rangoPopularidad }}</p>
+    <p class="text-primary">Valoración de la comunidad: {{ rangoPopularidad }}</p>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
   <input type="radio" class="btn-check" name="ordenacion" id="asc" autocomplete="off" v-model="ordenacion" value="asc">
   <label class="btn btn-outline-primary" for="asc">Menos recientes</label>
@@ -20,7 +20,7 @@
   <a :href="'/Detalles/'+pelicula.id" class="card-link">
     <div class="card mb-3" style="max-width: 540px;">
       <div class="row g-0">
-        <div class="col-md-4 position-relative">
+        <div class="col-md-4 position-relative ">
           <img :src="getImagenPelicula(pelicula.poster_path)" class="img-fluid rounded-start" alt="Movie Poster">
           <div class="position-absolute start-0 translate-middle-y p-2" style="width: 100%;">
             <span v-if="pelicula.vote_average.toFixed(2) >= 8.55" class="bg-danger rounded p-1 text-white">
@@ -99,7 +99,6 @@ const elegirPelicula = (pelicula) => {
   
 };
 
-
 watch(() => route.query.cadena, () => {
   if (route.query.cadena) {
     realizarBusquedaAPI();
@@ -107,7 +106,6 @@ watch(() => route.query.cadena, () => {
     peliculas.value = []; 
   }
 });
-
 
 onMounted(() => {
   if (route.query.cadena) {
@@ -126,4 +124,18 @@ onMounted(() => {
   .card-link:hover {
     color: inherit; 
   }
+  .card-img-container {
+
+  height: 100%; 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-fluid {
+  object-fit: cover; 
+  width: 100%; 
+  height: 100%; 
+}
 </style>

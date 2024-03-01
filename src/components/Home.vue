@@ -24,7 +24,6 @@
 import { ref } from 'vue';
 import Carrusel from './Carrusel.vue'
 import Lista from './lista.vue'
-import FichaPelicula from './FichaPelicula.vue'
 import { useRouter } from 'vue-router';
 
 
