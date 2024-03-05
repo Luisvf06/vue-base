@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <h1>{{ pelicula.title }}</h1>
+    <h1 class="peliculatitulo" id="titulo">{{ pelicula.title }}</h1>
     <img :src="getImagenPelicula(pelicula.poster_path)" class="img-fluid rounded-start mb-3" alt="Movie Poster">
     
     <div class="d-flex justify-content-around mb-3">
-      <button @click="agregarAPeliculaAWatchlist" class="btn btn-primary me-3">Agregar a Watchlist</button>
-      <button class="btn btn-primary me-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+      <button @click="agregarAPeliculaAWatchlist" class="btn me-3">Agregar a Watchlist</button>
+      <button class="btn  me-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
         Películas Recomendadas
       </button>
-      <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#trailerModal">
+      <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#trailerModal">
         Ver Tráiler
       </button>
     </div>
@@ -41,7 +41,7 @@
           <div class="card">
             <img :src="getImagenPelicula(recomendacion.poster_path)" class="card-img-top" :alt="recomendacion.title">
             <div class="card-body">
-              <h5 class="card-title">{{ recomendacion.title }}</h5>
+              <h5 class="card-title detalles">{{ recomendacion.title }}</h5>
             </div>
           </div>
           </a>
@@ -52,7 +52,7 @@
 </div>
 <div v-if="proveedores && proveedores.ES && proveedores.ES.flatrate">
       <h3>Disponible en:</h3>
-      <div class="proveedores d-flex justify-content-around">
+      <div class="proveedores d-flex justify-content-around mb-3">
         <div v-for="proveedor in proveedores.ES.flatrate" :key="proveedor.provider_id">
           <img :src="`https://image.tmdb.org/t/p/original${proveedor.logo_path}`" :alt="proveedor.provider_name" class="logo-proveedor">
         </div>
@@ -229,8 +229,15 @@ div {
 :deep(.modal-body) {
   background-color: #557593;
 }
+#titulo{
+  color:$color-sexto;
+}
+.btn{
+  background-color: $color-terciario;
+  color:$color-quinto;
+}
 .reparto{
-  background-color: #557593;
+  background-color: #577898;
   a{
     color: $color-primario;
     padding: 2rem 0;
@@ -268,6 +275,6 @@ img.img-fluid.rounded-start {
 
 }
 h3{
-  color: $color-quinto;
+  color: $color-sexto;
 }
 </style>

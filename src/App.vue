@@ -70,7 +70,7 @@ header {
 }
 
 nav.navbar {
-  background-color: $color-secundario;
+  background-color: $color-terciario;
   .nav-link {
     color: $color-cuarto;
     &:hover {

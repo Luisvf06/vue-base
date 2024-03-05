@@ -15,7 +15,7 @@
         </span>
         <div class="card-body">
           <h5 class="card-title">{{ movie.title }}</h5>
-          <span>{{ movie.overview.substring(0,200)+'...' }}</span>
+          <span class="descripcion">{{ movie.overview.substring(0,200)+'...' }}</span>
         </div>
       </div>
       </a>
@@ -68,7 +68,7 @@ onMounted(() => {
   }
   
   .card {
-    border: 1px solid lighten($color-secundario, 10%);
+    border: 1px solid lighten($color-primario, 10%);
     border-radius: 8px;
     transition: transform 0.3s ease-in-out;
 

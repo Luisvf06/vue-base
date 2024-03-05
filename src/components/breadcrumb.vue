@@ -45,5 +45,5 @@ const breadcrumbs = computed(() => {
 
   <style scoped lang="scss">
   @import '_styles.scss';
-    .breadcrumb-item{background-color: $color-secundario;}
+    .breadcrumb-item{background-color: $color-terciario;color: $color-quinto}
 </style>

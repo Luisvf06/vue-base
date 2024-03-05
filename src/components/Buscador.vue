@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label for="customRange3" class="form-label text-primary">Filtrar por popularidad</label>
+    <label for="customRange3" class="form-label">Filtrar por popularidad</label>
     <input type="range" class="form-range" min="0" max="10" step="0.5" id="customRange3" v-model="rangoPopularidad">
-    <p class="text-primary">Valoración de la comunidad: {{ rangoPopularidad }}</p>
+    <p class="descripcion">Valoración de la comunidad: {{ rangoPopularidad }}</p>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
   <input type="radio" class="btn-check" name="ordenacion" id="asc" autocomplete="off" v-model="ordenacion" value="asc">
   <label class="btn btn-outline-primary" for="asc">Menos recientes</label>
@@ -37,9 +37,9 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">{{ pelicula.title }}</h5>
-            <p class="card-text">{{ pelicula.overview.substring(0, 200) + '...'}}</p>
-            <p class="card-text">{{ 'Fecha de salida: ' + pelicula.release_date }}</p>
-            <p class="card-text">{{ 'Idioma original: ' + pelicula.original_language }}</p>
+            <p class="card-text infor">{{ pelicula.overview.substring(0, 200) + '...'}}</p>
+            <p class="card-text infor">{{ 'Fecha de salida: ' + pelicula.release_date }}</p>
+            <p class="card-text infor">{{ 'Idioma original: ' + pelicula.original_language }}</p>
           </div>
         </div>
       </div>
@@ -113,7 +113,8 @@ onMounted(() => {
   }
 });
 </script>
-<style scoped>
+<style scoped lang="scss">
+@import '_styles.scss';
   
   .card-link {
     text-decoration: none;
@@ -138,4 +139,12 @@ onMounted(() => {
   width: 100%; 
   height: 100%; 
 }
+.card-body {
+    h5{
+      background-color: $color-cuarto;
+      color: $color-primario;
+    }
+      span{background-color: $color-cuarto;
+      color: $color-primario;}
+    }
 </style>

@@ -19,16 +19,16 @@ body{
   }
 }
 
-  // Estilos para el carrusel
+  // Carrusel
   #carouselExampleSlidesOnly {
     .carousel-item {
       img {
-        border-radius: 5px; // Redondea las esquinas de las imágenes
+        border-radius: 5px; 
       }
     }
   }
   
-  // Estilos para la lista de películas
+  // Lista de películas
   .card-link {
     text-decoration: none;
     color: inherit;
@@ -39,36 +39,49 @@ body{
     }
   
     .card {
-      border: 1px solid #ccc; // Borde ligero alrededor de cada tarjeta
-      border-radius: 8px; // Bordes redondeados de las tarjetas
+      border: 1px solid #ccc;
+      border-radius: 8px; 
   
       img.card-img-top {
-        border-top-left-radius: 8px; // Redondea la esquina superior izquierda de la imagen
-        border-top-right-radius: 8px; // Redondea la esquina superior derecha de la imagen
+        border-top-left-radius: 8px; 
+        border-top-right-radius: 8px; 
       }
   
       .card-body {
-        padding: 1rem; // Espaciado interno de la tarjeta
+        padding: 1rem; 
       }
   
       .card-title {
-        font-weight: bold; // Texto del título en negrita
-        margin-bottom: 0.5rem; // Espaciado inferior del título
+        font-weight: bold; 
+        margin-bottom: 0.5rem; 
       }
   
       .card-text {
-        color: #666; // Color de texto más oscuro para el texto de la tarjeta
+        color: $color-quinto; 
       }
   
       .position-absolute {
-        // Estilos para los elementos absolutos (como las puntuaciones)
+        
       }
     }
   
-    // Estilos específicos para las puntuaciones
+    
     .bg-danger, .bg-warning, .bg-info {
-      color: #fff; // Texto blanco para las puntuaciones
-      padding: 0.2rem 0.5rem; // Espaciado interno de las puntuaciones
-      border-radius: 4px; // Bordes redondeados de las puntuaciones
+      color: #fff; 
+      padding: 0.2rem 0.5rem; 
+      border-radius: 4px; 
     }
+  }
+  label{
+    color:$color-sexto;
+
+  }
+  p{
+    color:$color-sexto;
+  }
+  .infor{
+    color:$color-quinto
+  }
+  h5{
+    color:$color-sexto;
   }

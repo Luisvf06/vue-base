@@ -17,7 +17,7 @@
                 <img :src="getImageUrl(movie.poster_path)" class="card-img-top" alt="Póster de la película">
                 <div class="card-body">
                   <h5 class="card-title">{{ movie.title }}</h5>
-                  <p class="card-text">{{ movie.release_date.substring(0, 4) }}</p>
+                  <p class="card-text descripcion">{{ movie.release_date.substring(0, 4) }}</p>
                 </div>
               </div>
                 </a>

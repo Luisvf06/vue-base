@@ -97,12 +97,19 @@ library.add(fas)
 
   </script>
   
-  <style scoped lang="scss">
+<style scoped lang="scss">
 @import '_styles.scss';
 
 .card-hover-wrapper {
   position: relative;
-
+  .card-body {
+    h5{
+      background-color: $color-cuarto;
+      color: $color-primario;
+    }
+      span{background-color: $color-cuarto;
+      color: $color-primario;}
+    }
   .btn-delete {
     position: absolute;
     bottom: 10px;
@@ -137,7 +144,7 @@ library.add(fas)
 
 h1 {
   color: #E0E0FF;
-  text-decoration: underline;
+  
 }
 
 
