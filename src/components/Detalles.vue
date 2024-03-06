@@ -1,7 +1,13 @@
 <template>
-  <div class="container">
-    <h1 class="peliculatitulo" id="titulo">{{ pelicula.title }}</h1>
+<div class="container">
+  <h1 class="peliculatitulo" id="titulo">{{ pelicula.title }}</h1>
+  <div v-if="pelicula.poster_path" class="contenedor-imagen">
     <img :src="getImagenPelicula(pelicula.poster_path)" class="img-fluid rounded-start mb-3" alt="Movie Poster">
+  </div>
+  <div v-else class="contenedor-imagen">
+    <img src="@/assets/sinfoto2.jpg" class="img-fluid" alt="Foto de la película">
+  </div>
+
     
     <div class="d-flex justify-content-around mb-3">
       <button @click="agregarAPeliculaAWatchlist" class="btn me-3">Agregar a Watchlist</button>
@@ -118,8 +124,8 @@ const getRecomendacionesPelicula = () => {
 };
 
 const obtenerTrailerPelicula = async () => {
-  const movieId = route.params.id; // Asumiendo que el ID de la película está en los parámetros de la ruta
-  const apiKey = '4431fed8390b02d6c28655feb536156a'; // Reemplaza esto con tu API key de TMDB
+  const movieId = route.params.id; 
+  const apiKey = '4431fed8390b02d6c28655feb536156a'; 
   const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`;
 
   try {
@@ -129,7 +135,6 @@ const obtenerTrailerPelicula = async () => {
     const data = await response.json();
     const trailers = data.results.filter(video => video.type === 'Trailer' && video.site === 'YouTube');
     if (trailers.length > 0) {
-      // Asumiendo que quieres el primer tráiler encontrado
       trailerUrl.value = `https://www.youtube.com/embed/${trailers[0].key}`;
     } else {
       console.log('No se encontraron tráilers para esta película.');
@@ -138,14 +143,6 @@ const obtenerTrailerPelicula = async () => {
     console.error('Error al obtener el tráiler de la película:', error);
   }
 };
-
-onMounted(() => {
-  getMoviesUrlApi();
-  getRepartoPelicula();
-  getRecomendacionesPelicula();
-  obtenerProveedoresPelicula();
-  obtenerTrailerPelicula();
-});
 
 const getMoviesUrlApi = () => {
   const options = {
@@ -169,7 +166,6 @@ function obtenerProveedoresPelicula() {
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDMxZmVkODM5MGIwMmQ2YzI4NjU1ZmViNTM2MTU2YSIsInN1YiI6IjY1YThmOTNlYzRmNTUyMDEyNzhlNjU2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.nArKWLxihtW5aycNC-GAqUwF7JGeo_Rj13o_5ZA7K3w'
         }
     };
-
     fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/watch/providers`, options)
         .then(response => response.json())
         .then(data => {
@@ -185,7 +181,6 @@ const getRepartoPelicula = () => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NDMxZmVkODM5MGIwMmQ2YzI4NjU1ZmViNTM2MTU2YSIsInN1YiI6IjY1YThmOTNlYzRmNTUyMDEyNzhlNjU2OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.nArKWLxihtW5aycNC-GAqUwF7JGeo_Rj13o_5ZA7K3w'
     }
   };
-
   fetch(`https://api.themoviedb.org/3/movie/${route.params.id}/credits?language=en-US`, options)
     .then(response => response.json())
     .then(data => {
@@ -226,12 +221,29 @@ const agregarAPeliculaAWatchlist = () => {
       
     });
 };
+onMounted(() => {
+  getMoviesUrlApi();
+  getRepartoPelicula();
+  getRecomendacionesPelicula();
+  obtenerProveedoresPelicula();
+  obtenerTrailerPelicula();
+});
 </script>
 <style  scoped lang="scss">
 @import '_styles.scss';
 
 div {
   text-align: center;
+  .contenedor-imagen {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  width: 400px;
+  height: 580px; 
+  margin: auto; 
+  border-radius: 10px; 
+  overflow: hidden; 
+  }
 }
 :deep(.modal-body) {
   background-color: #557593;
@@ -275,9 +287,11 @@ img.img-fluid.rounded-start {
   }
 
   img {
-    width: 100px;
+    max-width: 100px;
+    
     height: auto;
     border-radius: 50%;
+
   }
 
 }

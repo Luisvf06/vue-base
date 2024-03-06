@@ -83,10 +83,7 @@
     emit('peliculaElegida', movie);
   };
   
-  onMounted(() => {
-    getWatchlistMovies();
-  });
-  
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -94,11 +91,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(fas) 
 
 
-
+onMounted(() => {
+    getWatchlistMovies();
+  });
+  
   </script>
   
 <style scoped lang="scss">
-@import '_styles.scss';
+@use 'styles.scss' as *;
 
 .card-hover-wrapper {
   position: relative;

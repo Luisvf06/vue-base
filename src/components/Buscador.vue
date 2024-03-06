@@ -91,14 +91,6 @@ const peliculasOrdenadas = computed(() => {
   }
 });
 
-const ordenarPorFecha = (tipo) => {
-  ordenacion.value = tipo;
-};
-
-const elegirPelicula = (pelicula) => {
-  
-};
-
 watch(() => route.query.cadena, () => {
   if (route.query.cadena) {
     realizarBusquedaAPI();
