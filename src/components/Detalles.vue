@@ -65,9 +65,16 @@
   <h2>Reparto</h2>
   <div class="row">
     <div v-for="actor in reparto" :key="actor.id" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+      
       <router-link :to="`/actor/${actor.id}`">
+        <div v-if="actor.profile_path">
         <img :src="getImagenActor(actor.profile_path)" class="img-fluid rounded-circle" alt="Foto del actor">
         <p class="mt-2">{{ actor.name }}</p>
+        </div>
+        <div v-else>
+        <img src="@/assets/sinfoto.jpg" class="img-fluid rounded-circle" alt="Foto del actor">
+        <p class="mt-2">{{ actor.name }}</p>
+        </div>
       </router-link>
     </div>
   </div>
